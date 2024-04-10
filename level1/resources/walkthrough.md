@@ -20,7 +20,7 @@ Program received signal SIGSEGV, Segmentation fault.
 ```
 Here we can see that we have we have un error in the at the end of the stack (esp)
 
-So now we will launch the program the same way but this time we will remove "uuuuvvvvwwwwxxxxyyyyzzzz" + 4 bytes and add a 4 bytes shellcode instead
+So now we will launch the program the same way but this time we will remove "uuuuvvvvwwwwxxxxyyyyzzzz" + 4 bytes and add a 4 bytes shellcode instead(to acess the run function)
 
 But When I do:
 ```
