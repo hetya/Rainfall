@@ -1,4 +1,9 @@
-open the file in dogbolt we can see with snowman that the parameter given to the program should be == 0x1a7
+on the session we can see a binary file named ``level0``, the first thing to do is, open the file in [dogbolt](https://dogbolt.org/)
+
+
+
+
+on [dogbolt](https://dogbolt.org/) we can see with snowman, the program have a condition the parameter must be 0x1a7
 <img src="../assets/screen_dogbolt.png">
 
 0x1a7 = 423
