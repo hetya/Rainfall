@@ -13,17 +13,17 @@ char	*p(char *s, char *str)
 
 char	*pp(char *buffer)
 {
-	char			b[20];
-	char			a[20];
+	char			buffer_1[20];
+	char			buffer_2[20];
 	unsigned int	len;
 
-	p(a, " - ");
-	p(b, " - ");
-	strcpy(buffer, a);
+	p(buffer_2, " - ");
+	p(buffer_1, " - ");
+	strcpy(buffer, buffer_2);
 	len = strlen(buffer);
 	buffer[len] = ' ';
 	buffer[len + 1] = 0;
-	return (strcat(buffer, b));
+	return (strcat(buffer, buffer_1));
 }
 
 int		main(void)
