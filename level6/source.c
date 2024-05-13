@@ -16,12 +16,12 @@ void m(void *param_1,int param_2,char *param_3,int param_4,int param_5)
 
 int main(int ac,char **av) {
   char *dest;
-  void (*ppcVar1)(void);
+  void (*buff)(void);
 
   dest = (char *)malloc(64);
-  ppcVar1 = malloc(4);
-  ppcVar1 = &m;
+  buff = malloc(4);
+  buff = &m;
   strcpy(dest, av[1]);
-  ppcVar1();
+  buff();
   return 0;
 }

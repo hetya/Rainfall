@@ -9,10 +9,10 @@ void p(char *param_1) {
 }
 
 void n(void) {
-  char local_20c[520];
+  char buff[520];
 
-  fgets(local_20c, 512, stdin);
-  p(local_20c);
+  fgets(buff, 512, stdin);
+  p(buff);
   if (m == 16930116) {
     system("/bin/cat /home/user/level5/.pass");
   }

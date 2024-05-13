@@ -7,10 +7,10 @@ void o(void) {
 }
 
 void n(void) {
-  char var_20c[520];
+  char buff[520];
 
-  fgets(var_20c, 512, stdin);
-  printf(var_20c);
+  fgets(buff, 512, stdin);
+  printf(buff);
   exit(1);
 }
 

@@ -3,19 +3,19 @@
 #include <string.h>
 
 void p(void) {
-	unsigned int	retaddr;
-	char			s[64];
-    const void      *v2;
+	unsigned int	addr;
+	char			charset[64];
+    const void      *pointer;
 
     fflush(stdout);
-    gets(s);
-    v2 = (const void *)retaddr;
-    if ( (retaddr & 0xB0000000) == -1342177280 ) {
-        printf("(%p)\n", v2);
+    gets(charset);
+    pointer = (const void *)addr;
+    if ( (addr & 0xB0000000) == -1342177280 ) {
+        printf("(%p)\n", pointer);
         exit(1);
     }
-    puts(s);
-    strdup(s);
+    puts(charset);
+    strdup(charset);
     return;
 }
 

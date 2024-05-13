@@ -7,8 +7,8 @@ void run(void) {
 }
 
 int main(void) {
-    char local_50[76];
+    char buff[76];
 
-    gets(local_50);
+    gets(buff);
     return 0;
 }
