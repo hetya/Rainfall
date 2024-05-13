@@ -25,17 +25,18 @@ public:
 	}
 };
 
-int		main(int argc, char **argv)
-{
-    if (argc > 1)
-    {
-        N *buff = new N(5);
+int main(int ac,char **av) {
+	N *v6;
+	N *v4;
+
+	if (ac < 2) {
+		_exit(1);
+	}
 
 
-        N *buff_1 = new N(6);
+	v6 = new N(5); // esp+0x1c
+	v4 = new N(6); // esp+0x18
+	v6->setAnnotation(av[1]);
 
-        buff->setAnnotation(argv[1]);
-        return (buff_1->*(buff_1->func))(*buff);
-    }
-    _exit(1);
+	return v4->operator+(*v6);
 }
