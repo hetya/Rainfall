@@ -1,20 +1,25 @@
-void main(void) {
-    p();
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+void p(void) {
+	unsigned int	retaddr;
+	char			s[64];
+    const void      *v2;
+
+    fflush(stdout);
+    gets(s);
+    v2 = (const void *)retaddr;
+    if ( (retaddr & 0xB0000000) == -1342177280 ) {
+        printf("(%p)\n", v2);
+        exit(1);
+    }
+    puts(s);
+    strdup(s);
     return;
 }
 
-
-void p(void) {
-	unsigned int	check;
-	char			local50[76];
-
-    fflush(stdout);
-    gets(local50);
-    if ((check & 0xb0000000) == 0xb0000000) {
-        printf("(%p)\n", check);
-        exit(1);
-    }
-    puts(local50);
-    strdup(local50);
+void main(void) {
+    p();
     return;
 }
