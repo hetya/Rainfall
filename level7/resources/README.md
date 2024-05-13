@@ -2,6 +2,7 @@ Like the previous level before we start by opening the file in [dogbolt](https:/
 
 Here we can see that it use `malloc` and `strcpy`. We know that `strcpy` is not secure so let's try to use it to call the `m` function.
 Here is what we will try to do :
+<img src="assets/malloc_schema.png">
 
 After analyzing the code we see that `v5` is after `v6`
 So with the first `strcpy`  We will try to overflow on `v5` to overwrite the address of the second `strcpy` destination.
