@@ -29,14 +29,14 @@ int main(int argc,char **argv) {
 	N *v6;
 	N *v4;
 
-	if (ac < 2) {
+	if (argc < 2) {
 		_exit(1);
 	}
 
 
 	v6 = new N(5);
 	v4 = new N(6);
-	v6->setAnnotation(av[1]);
+	v6->setAnnotation(argv[1]);
 
 	return v4->operator+(*v6);
 }

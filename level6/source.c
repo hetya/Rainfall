@@ -21,7 +21,7 @@ int main(int argc,char **argv) {
   dest = (char *)malloc(64);
   buff = malloc(4);
   buff = &m;
-  strcpy(dest, av[1]);
+  strcpy(dest, argv[1]);
   buff();
   return 0;
 }

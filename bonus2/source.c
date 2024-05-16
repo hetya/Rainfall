@@ -29,12 +29,12 @@ int main(int argc, char **argv)
 	char	buffer[72];
 	char	*env = NULL;
 
-	if (ac != 3)
+	if (argc != 3)
 		return 1;
 
 	memset(buffer, 0, 72);
-	strncpy(buffer, av[1], 40);
-	strncpy(&buffer[40], av[2], 32);
+	strncpy(buffer, argv[1], 40);
+	strncpy(&buffer[40], argv[2], 32);
 	env = getenv("LANG");
 	if (env != 0)
 	{

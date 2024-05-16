@@ -10,7 +10,7 @@ int main(int argc, char **argv) {
     uid_t uid;
     gid_t gid;
 
-    number = atoi(av[1]);
+    number = atoi(argv[1]);
     if (number == 423) {
         cmd_args[0] = strdup("/bin/sh");
 		cmd_args[1] = 0;
