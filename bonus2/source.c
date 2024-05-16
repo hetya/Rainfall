@@ -26,7 +26,7 @@ void greetuser(char *user)
 
 int main(int ac, char **av)
 {
-	char	buffer[72];     //0x28 + 0x20
+	char	buffer[72];
 	char	*env = NULL;
 
 	if (ac != 3)

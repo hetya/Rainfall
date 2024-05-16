@@ -6,7 +6,7 @@
 int main(int ac, char **av)
 {
 	int ret;
-	char buffer[132];    // 0x9c - 0x18
+	char buffer[132];
 	FILE *f = fopen("/home/user/end/.pass", "r");
 
 	memset(buffer, 0, 132);

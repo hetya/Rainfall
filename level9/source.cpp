@@ -34,8 +34,8 @@ int main(int ac,char **av) {
 	}
 
 
-	v6 = new N(5); // esp+0x1c
-	v4 = new N(6); // esp+0x18
+	v6 = new N(5);
+	v4 = new N(6);
 	v6->setAnnotation(av[1]);
 
 	return v4->operator+(*v6);
