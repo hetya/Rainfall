@@ -2,7 +2,7 @@
 #include <string.h>
 #include <unistd.h>
 
-int		main(int ac, char **av)
+int		main(int argc, char **argv)
 {
 	int		nb;
 	char	str[40];

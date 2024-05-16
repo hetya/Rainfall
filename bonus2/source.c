@@ -24,7 +24,7 @@ void greetuser(char *user)
 	puts(buffer);
 }
 
-int main(int ac, char **av)
+int main(int argc, char **argv)
 {
 	char	buffer[72];
 	char	*env = NULL;

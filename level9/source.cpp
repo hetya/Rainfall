@@ -25,7 +25,7 @@ public:
 	}
 };
 
-int main(int ac,char **av) {
+int main(int argc,char **argv) {
 	N *v6;
 	N *v4;
 

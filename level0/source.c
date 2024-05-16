@@ -4,7 +4,7 @@
 #include <unistd.h>
 #include <sys/types.h>
 
-int main(int ac, char **av) {
+int main(int argc, char **argv) {
     int number;
 	char **cmd_args;
     uid_t uid;

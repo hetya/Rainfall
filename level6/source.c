@@ -14,7 +14,7 @@ void m(void *param_1,int param_2,char *param_3,int param_4,int param_5)
   return;
 }
 
-int main(int ac,char **av) {
+int main(int argc,char **argv) {
   char *dest;
   void (*buff)(void);
 

@@ -13,7 +13,7 @@ void m(void) {
   return;
 }
 
-int main(int ac, char **av) {
+int main(int argc, char **argv) {
   char *buff;
   char *buff_2;
   FILE *file;
