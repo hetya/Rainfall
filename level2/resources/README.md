@@ -18,7 +18,17 @@ Program received signal SIGSEGV, Segmentation fault.
 So here we see that we overflow on the 4 bytes `0x75757575` which translate to `uuuu`.
 We know that we start overflow after 80 character
 
-Now to find the returned address we will use `ltrace` on the file:
+The part :
+``` C
+if ( (addr & 0xB0000000) == -1342177280 ) {
+        printf("(%p)\n", pointer);
+        exit(1);
+    }
+```
+Ensure that the return address(store in eip) call when the function end is not on the stack
+So we will have to put our shellcode on the heap with the `strdup`
+
+Now we will use `ltrace`to find the address returned by `strdup`:
 
 ``` Shell
 level2@RainFall:~$ ltrace ./level2
