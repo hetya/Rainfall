@@ -15,8 +15,7 @@ void p(void) {
         exit(1);
     }
     puts(charset);
-    strdup(charset);
-    return;
+    return strdup(charset);
 }
 
 void main(void) {

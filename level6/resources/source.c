@@ -16,12 +16,12 @@ void m(void *param_1,int param_2,char *param_3,int param_4,int param_5)
 
 int main(int argc,char **argv) {
   char *dest;
-  void (*buff)(void);
+  void (*func_pointer)(void);
 
   dest = (char *)malloc(64);
-  buff = malloc(4);
-  buff = &m;
+  func_pointer = malloc(4);
+  func_pointer = &m;
   strcpy(dest, argv[1]);
-  buff();
+  func_pointer();
   return 0;
 }

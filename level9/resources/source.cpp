@@ -26,17 +26,17 @@ public:
 };
 
 int main(int argc,char **argv) {
-	N *v6;
-	N *v4;
+	N *a;
+	N *b;
 
 	if (argc < 2) {
 		_exit(1);
 	}
 
 
-	v6 = new N(5);
-	v4 = new N(6);
-	v6->setAnnotation(argv[1]);
+	a = new N(5);
+	b = new N(6);
+	a->setAnnotation(argv[1]);
 
-	return v4->operator+(*v6);
+	return b->operator+(*a);
 }
