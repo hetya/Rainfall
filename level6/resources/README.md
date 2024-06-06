@@ -1,14 +1,20 @@
-First, let's analyze the binary. The program performs two malloc operations one after the other, and there are two functions: one that is called via a function pointer and another that is not called.
+First, let's analyze the source code.
 
-Let's focus on the malloc operations in our program. There are two, one after the other, and the second one becomes the function pointer of m before being executed.
+We can see that :
+    
+- The main function allocate 2 pointer one for a string with a size of 64 char and one function pointer with a size of 4 bytes.
+- It store the address of the function `m` in the function pointer
+- The main copy `argv[1]` in the buffer (`dest`) with a `strcpy`
+- And finish by executing the function at the address store in the function pointer
+- In the source code there is 2 other function :
+    - The function `m` write "Nope"
+    - The function `n` cat the flag
 
-Since the malloc calls are made directly one after the other, it is predictable that their addresses will follow each other. argv[1] is copied into the first malloc buffer using strcpy.
 
-We will overflow the first malloc buffer to reach the second one and redirect it to n instead of m.
+Let's focus on the mallocs, since they allocate memory one after the other, since the char buffer is allocate first we can use the buffer `dest` to overwrite the function pointer with the address of `n`
 
-To do this, we will start by determining the size of the first malloc buffer using wiremask to provide a pattern.
-
-```
+To do this, we will start by determining the offset needed to make the buffer(`dest`) overwrite the function pointer, using [wiremask](https://wiremask.eu/tools/buffer-overflow-pattern-generator).
+``` Shell
 level6@RainFall:~$ gdb level6
 GNU gdb (Ubuntu/Linaro 7.4-2012.04-0ubuntu2.1) 7.4-2012.04
 Copyright (C) 2012 Free Software Foundation, Inc.
@@ -26,8 +32,7 @@ Starting program: /home/user/level6/level6 Aa0Aa1Aa2Aa3Aa4Aa5Aa6Aa7Aa8Aa9Ab0Ab1A
 Program received signal SIGSEGV, Segmentation fault.
 0x41346341 in ?? ()
 ```
-
-When we put `0x41346341` in `wiremask` it find an offset of 72.
+When we put `0x41346341` in [wiremask](https://wiremask.eu/tools/buffer-overflow-pattern-generator) it find an offset of 72.
 
 
 After that, we will look for the pointer to n.
