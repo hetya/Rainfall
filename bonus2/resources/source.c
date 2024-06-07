@@ -10,7 +10,7 @@ void greetuser(char *user)
 
 	if (lang == 1)
 	{
-		strcpy(buffer, "Hyv\xc3\xa4\xc3\xa4 p\xc3\xa4iv\xc3\xa4\xc3\xa4 ");
+		strcpy(buffer, "Hyvää päivää ");
 	}
 	else if (lang == 2)
 	{

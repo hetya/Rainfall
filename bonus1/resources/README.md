@@ -37,3 +37,22 @@ Put together we have :
 ./bonus1 -1073741813  $(python -c 'print "A" * 40 + "\x46\x4c\x4f\x57"')
 ```
 
+---
+
+
+After analyzing the binary, we see that to execute /bin/sh, the variable nb must be equal to 1464814662. However, nb, which is the result of atoi(argv[1]), must also be less than 9.
+
+There are two things to note: atoi returns an int, while memcpy uses an unsigned int. To overflow the str, memcpy needs to copy 40 characters from str plus the value we will replace in hex, totaling 44 characters. Since there is a multiplication by 4 in the memcpy, we need to make sure that nb equals 11.
+
+44/4 = 11
+
+To get 11 as an unsigned integer conversion, we need to do the following:
+
+−
+-2147483648 + 11 = -2147483637
+
+To transform 1464814662 into hexadecimal to fill the int with the correct number:
+
+1464814662 in hex: 574f4c46
+
+In little endian: \x46\x4c\x4f\x57
