@@ -1,2 +1,2 @@
 # rainfall
-42 CTF
+A 42 CTF

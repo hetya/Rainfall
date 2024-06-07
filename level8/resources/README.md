@@ -20,7 +20,7 @@ auth
 service
 > 0x804a018, 0x804a028
 ```
-Here after each input the program print auth pointer and service pointer
+Here after each input the program print the auth pointer and the service pointer
 
 
 Here we see that after each input of `service` or `auth` a new pointer is created after the previous ones with an increment of 0x10.
