@@ -9,7 +9,7 @@ Using [dogbolt](https://dogbolt.org/) we can see that the program allocate `6c`:
 So we know that we will need an offset of 108 bytes to overwrite `b`
 
 So what are we going to do : 
-In the return of main has a double dereferenced call of `b->operator+` because of how vtables works.
+In the return of main has a double dereferenced call ( `b->operator+`) because of how virtual function and vtables works.
 Since we can write on `b` with `a` we will have to put an address pointing to another address pointing to our shellcode
 
 
