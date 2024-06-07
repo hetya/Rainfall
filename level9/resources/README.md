@@ -6,11 +6,11 @@ In this file there is 2 interesting thing :
 - In the class `N` the is a method `N::setAnnotation` which use a `memcpy` to copy `argv[1]` in a buffer from the class
 
 Using [dogbolt](https://dogbolt.org/) we can see that the program allocate `6c`: 108 bytes with `new` : ```v3 = (N *)operator new(0x6Cu);```
-So we know that we will need an offset of 108 bytes to overwrite `v4`
+So we know that we will need an offset of 108 bytes to overwrite `b`
 
 So what are we going to do : 
-In the return of main has a double dereferenced call of `v4->operator+` because of how vtables works.
-Since we can write on `v4` with `v6` we will have to put an address pointing to another address pointing to our shellcode
+In the return of main has a double dereferenced call of `b->operator+` because of how vtables works.
+Since we can write on `b` with `a` we will have to put an address pointing to another address pointing to our shellcode
 
 
 Finding the address of our input in the heap:
@@ -82,9 +82,9 @@ So address end of the heap - 1 : `0x806b000` - 1 => `0x806afff`
 The address of our input is : `0x804a00c`
 
 Here we have to launch `/bin/sh` with a shellcode
-To accommodate the double dereferencement we will overwrite the address of `v4` with the address of the beginning of our heap buffer.
+To accommodate the double dereferencement we will overwrite the address of `b` with the address of the beginning of our heap buffer.
 At the start of our input we will put another address pointing to the shellcode :
-[address of input + 4(sizeof this address)][shellcode][padding][address of input(this overwrite `v4`)]
+[address of input + 4(sizeof this address)][shellcode][padding][address of input(this overwrite `b`)]
 address of the input in the heap : `0x804a00c`
 in little endian : `\x0c\xa0\x04\x08`
 address of the shellcode (input + 4) : `0x804a00c + 0x4 = 804A010`
